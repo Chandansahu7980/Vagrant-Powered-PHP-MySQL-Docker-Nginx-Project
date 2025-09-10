@@ -1,0 +1,1 @@
+{"virtualbox":{"/home/vagrant/mysql-init":{"guestpath":"/home/vagrant/mysql-init","hostpath":"D:/vagrant-vms/my-cluster/mysql","disabled":false,"__vagrantfile":true},"/vagrant":{"guestpath":"/vagrant","hostpath":"D:/vagrant-vms/my-cluster","disabled":false,"__vagrantfile":true}}}

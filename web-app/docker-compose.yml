@@ -1,0 +1,39 @@
+version: '3.3'
+
+services:
+  web-app1:
+    build: ./app
+    container_name: web-app1
+    ports:
+      - "8001:80"
+    volumes:
+      - ./app:/var/www/html
+    restart: unless-stopped
+    networks:
+      - app-net
+
+  web-app2:
+    build: ./app
+    container_name: web-app2
+    ports:
+      - "8002:80"
+    volumes:
+      - ./app:/var/www/html
+    restart: unless-stopped
+    networks:
+      - app-net
+
+  web-app3:
+    build: ./app
+    container_name: web-app3
+    ports:
+      - "8003:80"
+    volumes:
+      - ./app:/var/www/html
+    restart: unless-stopped
+    networks:
+      - app-net
+
+networks:
+  app-net:
+    driver: bridge

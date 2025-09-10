@@ -1,0 +1,1 @@
+{"virtualbox":{"/home/vagrant/nginx-config":{"guestpath":"/home/vagrant/nginx-config","hostpath":"D:/vagrant-vms/my-cluster/nginx","disabled":false,"__vagrantfile":true},"/vagrant":{"guestpath":"/vagrant","hostpath":"D:/vagrant-vms/my-cluster","disabled":false,"__vagrantfile":true}}}
