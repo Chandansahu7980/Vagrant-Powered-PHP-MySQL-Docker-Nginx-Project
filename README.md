@@ -16,7 +16,7 @@ This project demonstrates how to automate a complete local development environme
 ---
 
 ## 📁 Project Structure
-
+```
 MY-CLUSTER/
 │
 ├── .vagrant/ # Vagrant machine metadata
