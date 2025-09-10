@@ -77,6 +77,22 @@ Before you begin, make sure you have:
 - ✅ [Git](https://git-scm.com/downloads)  
 
 ---
+🗺 Architecture Diagram (ASCII)
+```
+[User Browser]
+     |
+     v
+[Nginx VM - 192.168.56.20]   <-- Reverse proxy & load balancer
+     |        |        |
+     v        v        v
+[PHP Container A] [PHP Container B] [PHP Container C]
+   (webserver VM: docker containers)
+     \        |       /
+      \       |      /
+       v      v     v
+    [MySQL VM - 192.168.56.22]  <-- Persistent DB
+
+```
 
 ## 🚀 Setup & Usage  
 
@@ -160,16 +176,14 @@ Great for:
 ```
 
 🔗 Useful Links
-Vagrant Docs — https://developer.hashicorp.com/vagrant
-Docker Docs — https://docs.docker.com/
-PHP Manual — https://www.php.net/manual/en/
-MySQL Docs — https://dev.mysql.com/doc/
-Nginx Docs — https://nginx.org/en/docs/
+- Vagrant Docs — https://developer.hashicorp.com/vagrant
+- Docker Docs — https://docs.docker.com/
+- PHP Manual — https://www.php.net/manual/en/
+- MySQL Docs — https://dev.mysql.com/doc/
+- Nginx Docs — https://nginx.org/en/docs/
 
 📄 License
 MIT License © Chandan Kumar Sahau
 ---
-Do you want me to also **add an architecture diagram (ASCII or image)** showing `User → Nginx → PHP Containers → MySQL`, so it’s more visually clear in the README?
-
 
 
