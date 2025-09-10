@@ -1,83 +1,83 @@
 # 🐘 My-Cluster  
-*A Vagrant-Powered PHP + MySQL + Docker + Nginx Project*  
+A Vagrant-Powered PHP + MySQL + Docker + Nginx Project
 
-This project automates a **local development cluster** using **Vagrant**, **Docker**, **PHP**, **MySQL**, and **Nginx**.  
-It simulates a small **production-like microservices environment**, helping developers learn how services interact in a real-world setup.  
-
----
-
-## 🧩 Features  
-
-- 🔧 **3 VMs automated with Vagrant** (MySQL, Web App, Nginx Proxy)  
-- 🐬 **MySQL Database** auto-bootstrapped with an init script  
-- 🐘 **PHP Web App** running inside Docker containers  
-- 🌐 **Nginx Reverse Proxy** for load balancing between PHP containers  
-- 📦 **Fully containerized & VM-isolated** environment  
-- 📁 Clean **project structure** with reusable configs  
+This project helps you set up a simple local development cluster using Vagrant, Docker, PHP, MySQL, and Nginx.  
+You can use it to learn how web services work together, just like in a real-world microservices environment.
 
 ---
 
-## 📚 Technologies Used  
+## Features
 
-### 🖥 Vagrant  
-- Tool for managing **virtual machines** with simple config files.  
-- [Docs → Vagrant by HashiCorp](https://developer.hashicorp.com/vagrant)  
-
-### 🐳 Docker  
-- Lightweight containers for **isolated app environments**.  
-- Perfect for running **multiple PHP app instances**.  
-- [Docs → Docker](https://docs.docker.com/)  
-
-### 🐘 PHP  
-- Popular server-side scripting language used for web applications.  
-- [Docs → PHP Manual](https://www.php.net/manual/en/)  
-
-### 🐬 MySQL  
-- Open-source relational database system.  
-- Used here for storing and retrieving data from the PHP app.  
-- [Docs → MySQL](https://dev.mysql.com/doc/)  
-
-### 🌐 Nginx  
-- High-performance **reverse proxy and load balancer**.  
-- Distributes traffic across multiple PHP containers.  
-- [Docs → Nginx](https://nginx.org/en/docs/)  
+- 3 virtual machines (VMs) created with Vagrant:
+  - MySQL Database VM
+  - Web App VM (PHP in Docker)
+  - Nginx Proxy VM
+- MySQL is set up automatically with an initial SQL script
+- PHP web app runs inside Docker containers
+- Nginx acts as a reverse proxy and load balancer for PHP containers
+- Everything is containerized and separated by VMs
+- Clean project structure with easy-to-use configuration files
 
 ---
 
-## 📁 Project Structure  
+## VM Roles Table
+
+| VM Name    | Purpose                    | IP Address       |
+|------------|----------------------------|------------------|
+| mysql      | MySQL database             | 192.168.56.22    |
+| webserver  | PHP web app (Docker)       | 192.168.56.21    |
+| nginx      | Reverse proxy/load balancer| 192.168.56.20    |
+
+---
+
+## Technologies Used
+
+- **Vagrant:** Manages virtual machines.  
+  [Vagrant Docs](https://developer.hashicorp.com/vagrant)
+- **Docker:** Runs PHP applications in isolated containers.  
+  [Docker Docs](https://docs.docker.com/)
+- **PHP:** Server-side scripting for web applications.  
+  [PHP Manual](https://www.php.net/manual/en/)
+- **MySQL:** Stores and retrieves data for the PHP app.  
+  [MySQL Docs](https://dev.mysql.com/doc/)
+- **Nginx:** High-performance reverse proxy and load balancer.  
+  [Nginx Docs](https://nginx.org/en/docs/)
+
+---
+
+## Project Structure
 
 ```
 MY-CLUSTER/
 │
-├── .vagrant/ # Vagrant machine metadata
+├── .vagrant/           # Vagrant machine metadata
 ├── mysql/
-│ └── my_init.sql # SQL to setup database, user, table
-│
+│   └── my_init.sql     # Sets up the database, user, table
 ├── nginx/
-│ └── my_nginx.conf # Nginx reverse proxy config
-│
+│   └── my_nginx.conf   # Nginx reverse proxy config
 ├── web-app/
-│ ├── app/
-│ │ ├── conn.php # PHP-MySQL connection script
-│ │ ├── index.php # Entry point PHP page
-│ │ ├── Dockerfile # PHP container
-│ └── docker-compose.yml # Defines PHP containers
-│
-└── Vagrantfile # Defines and provisions VMs
+│   ├── app/
+│   │   ├── conn.php    # PHP-MySQL connection script
+│   │   ├── index.php   # Main PHP page
+│   │   ├── Dockerfile  # PHP container instructions
+│   └── docker-compose.yml # PHP containers config
+└── Vagrantfile         # Configures and starts VMs
 ```
 
 ---
 
-## ⚙️ Prerequisites  
+## Prerequisites
 
-Before you begin, make sure you have:  
+Before starting, install these:
 
-- ✅ [VirtualBox](https://www.virtualbox.org/)  
-- ✅ [Vagrant](https://developer.hashicorp.com/vagrant/downloads)  
-- ✅ [Git](https://git-scm.com/downloads)  
+- [VirtualBox](https://www.virtualbox.org/)
+- [Vagrant](https://developer.hashicorp.com/vagrant/downloads)
+- [Git](https://git-scm.com/downloads)
 
 ---
-🗺 Architecture Diagram (ASCII)
+
+## Architecture Diagram (ASCII)
+
 ```
 [User Browser]
      |
@@ -91,99 +91,107 @@ Before you begin, make sure you have:
       \       |      /
        v      v     v
     [MySQL VM - 192.168.56.22]  <-- Persistent DB
-
 ```
 
-## 🚀 Setup & Usage  
+---
 
-### 1. Clone the Project  
+## How to Set Up and Use
+
+### 1. Clone the Project
+
 ```bash
-git clone https://github.com/your-username/my-cluster.git
-cd my-cluster
+git clone https://github.com/Chandansahu7980/Vagrant-Powered-PHP-MySQL-Docker-Nginx-Project.git
+cd Vagrant-Powered-PHP-MySQL-Docker-Nginx-Project
 ```
+
 ### 2. Start All VMs
-```
+
+```bash
 vagrant up
 ```
 This will create 3 VMs:
-- mysql → Sets up MySQL server with schema and data
-- webserver → Runs PHP app inside Docker containers
-- nginx → Configures reverse proxy load balancing
+- `mysql` — Sets up MySQL server with schema and data
+- `webserver` — Runs PHP app inside Docker containers
+- `nginx` — Configures reverse proxy load balancing
+
 ### 3. Access the Web App
-Open your browser:
+
+Open your browser and go to:
 ```
 http://192.168.56.20
 ```
-This routes traffic via Nginx to multiple PHP containers in the webserver VM.
+This will show the PHP app, routed through Nginx to the PHP containers.
 
-📜 PHP App Behavior
+---
+
+## What the PHP App Does
+
 - Connects to the MySQL database
-- Displays container/server info
-- Outputs phpinfo() for debugging
-Database connection snippet (conn.php):
-```
+- Shows container/server info
+- Displays `phpinfo()` for debugging
+
+**Database connection example (`conn.php`):**
+```php
 $conn = new mysqli("192.168.56.22", "phpuser", "phpuser", "my_project_db");
 ```
 
-🐞 Troubleshooting
-❗ VM doesn't boot / Times out?
-Enable virtualization in BIOS
-Allocate more RAM/CPU to your VMs
-Reset with:
-```vagrant destroy -f && vagrant up
-```
+---
 
-❗ MySQL connection refused?
-Ensure MySQL VM is running & bind-address is correct
-Open port 3306
-Temporarily disable firewall:
-```
-sudo ufw disable
-```
-❗ Nginx fails to start?
-Run inside Nginx VM:
-```
-sudo nginx -t
-sudo journalctl -xe
-```
-🔄 Rebuilding Everything
-If something breaks, clean up and start fresh:
-```
+## Troubleshooting
+
+#### VM doesn't boot or times out?
+- Make sure virtualization is enabled in BIOS
+- Give more RAM or CPU to your VMs
+- Reset everything with:
+  ```bash
+  vagrant destroy -f && vagrant up
+  ```
+
+#### MySQL connection refused?
+- Check that MySQL VM is running
+- Make sure port 3306 is open
+- Disable firewall temporarily:
+  ```bash
+  sudo ufw disable
+  ```
+
+#### Nginx fails to start?
+- Run these inside the Nginx VM:
+  ```bash
+  sudo nginx -t
+  sudo journalctl -xe
+  ```
+
+#### Rebuild Everything
+
+If something is broken, clean up and restart:
+```bash
 vagrant destroy -f
 rm -rf .vagrant
 vagrant up --provision
 ```
 
-🎯 End Goal
-This project simulates a microservices-style architecture:
-```
-🖥 Linux OS isolation with Vagrant
-🐳 Dockerized App Services
-🌐 Nginx Load Balancing
-🐬 MySQL Persistent Storage
-```
-Great for:
-- Local development
-- Testing orchestration
-- Learning full-stack infrastructure
-
-```
-💡 Next Ideas
-📊 Add monitoring (Prometheus + Grafana)
-🔐 Add SSL termination in Nginx
-🐬 Containerize MySQL
-☸️ Try Kubernetes or Docker Swarm
-```
-
-🔗 Useful Links
-- Vagrant Docs — https://developer.hashicorp.com/vagrant
-- Docker Docs — https://docs.docker.com/
-- PHP Manual — https://www.php.net/manual/en/
-- MySQL Docs — https://dev.mysql.com/doc/
-- Nginx Docs — https://nginx.org/en/docs/
-
-📄 License
-MIT License © Chandan Kumar Sahau
 ---
 
+## Next Ideas
 
+- Add monitoring (Prometheus + Grafana)
+- Add SSL termination in Nginx
+- Containerize MySQL
+- Try Kubernetes or Docker Swarm
+
+---
+
+## Useful Links
+
+- [Vagrant Docs](https://developer.hashicorp.com/vagrant)
+- [Docker Docs](https://docs.docker.com/)
+- [PHP Manual](https://www.php.net/manual/en/)
+- [MySQL Docs](https://dev.mysql.com/doc/)
+- [Nginx Docs](https://nginx.org/en/docs/)
+
+---
+
+## License
+
+MIT License © Chandan Kumar Sahau
